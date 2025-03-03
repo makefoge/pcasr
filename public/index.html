@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Quiz - Kahoot Style</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/css/uikit.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="uk-container uk-container-xsmall">
+        <!-- Экран входа -->
+        <div id="login-screen" class="screen uk-flex uk-flex-center uk-flex-middle">
+            <div class="uk-width-1-1">
+                <div class="uk-text-center">
+                    <h1 class="kahoot-title">PC Quiz</h1>
+                    <div class="kahoot-card uk-card uk-card-default uk-card-body">
+                        <h3 class="uk-card-title">Введите никнейм</h3>
+                        <div class="uk-margin">
+                            <input type="text" id="player-name" class="uk-input kahoot-input" placeholder="Никнейм">
+                            <label class="admin-checkbox">
+                                <input type="checkbox" id="is-admin">
+                                <span>Войти как админ</span>
+                            </label>
+                            <button id="join-btn" class="kahoot-button kahoot-button-black">Играть!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Экран ожидания -->
+        <div id="waiting-screen" class="screen uk-flex uk-flex-center uk-flex-middle uk-hidden">
+            <div class="uk-width-1-1">
+                <div class="uk-text-center">
+                    <h2 class="kahoot-subtitle">Лобби</h2>
+                    <div class="kahoot-card uk-card uk-card-default uk-card-body">
+                        <div class="lobby-info">
+                            <div class="player-count">
+                                <span id="player-count">0</span> игроков
+                            </div>
+                            <ul id="players-list" class="uk-list uk-list-divider players-list"></ul>
+                        </div>
+                        <button id="start-btn" class="kahoot-button kahoot-button-black" style="display: none;">Начать игру!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Экран вопроса -->
+        <div id="question-screen" class="screen uk-flex uk-flex-center uk-hidden">
+            <div class="uk-width-1-1">
+                <div class="timer-wrapper">
+                    <div id="timer-bar" class="timer-bar"></div>
+                </div>
+                <div class="question-container">
+                    <div id="question-number" class="question-counter"></div>
+                    <h2 id="question-text" class="question-text"></h2>
+                </div>
+                <div class="options-container">
+                    <div class="options-row top-row">
+                        <button class="option-button red" data-index="0">
+                            <span class="option-shape">▲</span>
+                            <span class="option-text"></span>
+                        </button>
+                        <button class="option-button blue" data-index="1">
+                            <span class="option-shape">◆</span>
+                            <span class="option-text"></span>
+                        </button>
+                    </div>
+                    <div class="options-row bottom-row">
+                        <button class="option-button yellow" data-index="2">
+                            <span class="option-shape">●</span>
+                            <span class="option-text"></span>
+                        </button>
+                        <button class="option-button green" data-index="3">
+                            <span class="option-shape">■</span>
+                            <span class="option-text"></span>
+                        </button>
+                    </div>
+                </div>
+                <div id="score-popup" class="score-popup uk-hidden"></div>
+            </div>
+        </div>
+
+        <!-- Экран результатов -->
+        <div id="results-screen" class="screen uk-flex uk-flex-center uk-hidden">
+            <div class="uk-width-1-1">
+                <div class="kahoot-card uk-card uk-card-default uk-card-body">
+                    <div id="answer-result" class="answer-result"></div>
+                    <div class="uk-margin">
+                        <h3 class="uk-text-center">Таблица лидеров</h3>
+                        <div class="podium-wrapper">
+                            <div id="scores-list" class="scores-list"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Экран окончания игры -->
+        <div id="game-over-screen" class="screen uk-flex uk-flex-center uk-hidden">
+            <div class="uk-width-1-1">
+                <div class="uk-text-center">
+                    <h2 class="kahoot-subtitle">Игра окончена! 🎉</h2>
+                    <div class="kahoot-card uk-card uk-card-default uk-card-body">
+                        <div class="winner-podium">
+                            <div id="final-scores-list" class="final-scores"></div>
+                        </div>
+                        <button id="play-again-btn" class="uk-button uk-button-primary uk-width-1-1 kahoot-button">Играть снова!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+</body>
+</html> 
